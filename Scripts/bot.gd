@@ -40,7 +40,7 @@ func _physics_process(delta: float) -> void:
 		IsCrouching = not IsCrouching
  
 	if Input.is_action_pressed("Down"): # Handles Fast-Falling
-		if velocity.y > 40:
+		if velocity.y > 40 and $FastFallingDelayTimer.is_stopped():
 			IsFastFalling = true
 			velocity.y += 500
 			$FastFallingDelayTimer.start()
