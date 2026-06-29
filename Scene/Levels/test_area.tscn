@@ -10,6 +10,21 @@ size = Vector2(519, 17)
 [node name="Test area" type="Node2D"]
 position = Vector2(1, -1)
 
+[node name="Wall5" type="CharacterBody2D" parent="." groups=["Wall"]]
+position = Vector2(745, -427)
+rotation = -4.74119
+up_direction = Vector2(0.995037, -0.0995037)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall5"]
+position = Vector2(56, 0)
+shape = SubResource("RectangleShape2D_p65wg")
+
+[node name="Icon3" type="Sprite2D" parent="Wall5"]
+position = Vector2(59.002, 0.112717)
+rotation = 1.56891
+scale = Vector2(0.132813, 4.04688)
+texture = ExtResource("1_6gkhc")
+
 [node name="Wall4" type="CharacterBody2D" parent="." groups=["Wall"]]
 position = Vector2(238, -345)
 rotation = 4.71915

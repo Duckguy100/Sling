@@ -31,7 +31,7 @@ func _physics_process(delta: float) -> void:
 				TempSpeed += 850
 				velocity.y += -100
 			if not is_on_floor() and not $ObjectDetectorRight.get_overlapping_bodies().is_empty():
-				TempSpeed += 850
+				TempSpeed += -850
 				velocity.y += -100
 			velocity.y = JUMP_VELOCITY # Normall Jumps
 			NumOfJumps -= 1
@@ -42,16 +42,16 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("Down"): # Handles Fast-Falling
 		if velocity.y > 40:
 			IsFastFalling = true
-			velocity.y += 700
+			velocity.y += 500
 			$FastFallingDelayTimer.start()
 			
 	if not IsOnGround and is_on_floor():# IsOnGround is on a delay so it only Runs for 1 
 		if IsGrowing and IsCrouching: # Handles Hops
 			if FacingDirection: # Right
-				TempSpeed += 900
+				TempSpeed += 600
 			else: # Left
-				TempSpeed -= 900
-			velocity.y -= 900
+				TempSpeed -= 600
+			velocity.y -= 200
 			
 		if IsFastFalling: # Handles Disabling Fast-Fall and KnockBack
 			IsFastFalling = false
