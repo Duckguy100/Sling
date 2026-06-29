@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://darm5kd4o3k5e"]
+
+[ext_resource type="Script" uid="uid://y3waf7b6jhqw" path="res://Scripts/bot.gd" id="1_g4cgf"]
+[ext_resource type="Texture2D" uid="uid://bkt14nl1762gd" path="res://Assets/Sprites/Slugcat.png" id="2_iw7pi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p6qfx"]
+size = Vector2(6, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1otca"]
+size = Vector2(3.5625, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d58a2"]
+size = Vector2(4.125, 12)
+
+[node name="Bot" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_g4cgf")
+metadata/_edit_horizontal_guides_ = [0.0]
+
+[node name="Slugcat" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+texture = ExtResource("2_iw7pi")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_p6qfx")
+
+[node name="ObjectDetectorLeft" type="Area2D" parent="."]
+position = Vector2(-1, 0)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ObjectDetectorLeft"]
+position = Vector2(-4.21875, 1)
+shape = SubResource("RectangleShape2D_1otca")
+
+[node name="ObjectDetectorRight" type="Area2D" parent="."]
+position = Vector2(-1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectDetectorRight"]
+position = Vector2(7.0625, 1)
+shape = SubResource("RectangleShape2D_d58a2")
+
+[node name="FastFallingDelayTimer" type="Timer" parent="."]
+wait_time = 1.2
+
+[node name="ChangingTimer" type="Timer" parent="."]
+wait_time = 0.25
+
+[connection signal="body_entered" from="ObjectDetectorLeft" to="." method="_on_object_detector_body_entered"]
+[connection signal="body_entered" from="ObjectDetectorRight" to="." method="_on_object_detector_body_entered"]
+[connection signal="timeout" from="FastFallingDelayTimer" to="." method="_on_fast_falling_delay_timer_timeout"]
+[connection signal="timeout" from="ChangingTimer" to="." method="_on_growing_timer_timeout"]
+[connection signal="timeout" from="ChangingTimer" to="." method="_on_changing_timer_timeout"]

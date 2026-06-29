@@ -1,0 +1,102 @@
+[gd_scene load_steps=5 format=3 uid="uid://dme10jbvrk8aw"]
+
+[ext_resource type="Texture2D" uid="uid://cgc2wu5ygivov" path="res://icon.svg" id="1_6gkhc"]
+[ext_resource type="PackedScene" uid="uid://darm5kd4o3k5e" path="res://Scene/Creatures/bot.tscn" id="2_ff3sl"]
+[ext_resource type="PackedScene" uid="uid://cp3r24btlb15n" path="res://Scene/Other/control.tscn" id="3_ff3sl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p65wg"]
+size = Vector2(519, 17)
+
+[node name="Test area" type="Node2D"]
+position = Vector2(1, -1)
+
+[node name="Wall4" type="CharacterBody2D" parent="." groups=["Wall"]]
+position = Vector2(238, -345)
+rotation = 4.71915
+up_direction = Vector2(0.995037, -0.0995037)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall4"]
+position = Vector2(56, 0)
+shape = SubResource("RectangleShape2D_p65wg")
+
+[node name="Icon3" type="Sprite2D" parent="Wall4"]
+position = Vector2(59.002, 0.112717)
+rotation = 1.56891
+scale = Vector2(0.132813, 4.04688)
+texture = ExtResource("1_6gkhc")
+
+[node name="Wall3" type="CharacterBody2D" parent="." groups=["Wall"]]
+position = Vector2(561, -124)
+rotation = 3.12082
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall3"]
+position = Vector2(56, 0)
+shape = SubResource("RectangleShape2D_p65wg")
+
+[node name="Icon3" type="Sprite2D" parent="Wall3"]
+position = Vector2(59.002, 0.112717)
+rotation = 1.58118
+scale = Vector2(0.132813, 4.04688)
+texture = ExtResource("1_6gkhc")
+
+[node name="Wall2" type="CharacterBody2D" parent="." groups=["Wall"]]
+position = Vector2(-361, -242)
+rotation = -1.58118
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
+position = Vector2(56, 0)
+shape = SubResource("RectangleShape2D_p65wg")
+
+[node name="Icon3" type="Sprite2D" parent="Wall2"]
+position = Vector2(59.002, 0.112717)
+rotation = 1.58118
+scale = Vector2(0.132813, 4.04688)
+texture = ExtResource("1_6gkhc")
+
+[node name="Floor" type="CharacterBody2D" parent="."]
+position = Vector2(-168, -57)
+
+[node name="Icon4" type="Sprite2D" parent="Floor"]
+position = Vector2(56, 2.99999)
+scale = Vector2(4.10938, 0.171875)
+texture = ExtResource("1_6gkhc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(55.5, 1.5)
+shape = SubResource("RectangleShape2D_p65wg")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(56, 0)
+shape = SubResource("RectangleShape2D_p65wg")
+
+[node name="Icon2" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(62.5, 2)
+scale = Vector2(4.17969, 0.1875)
+texture = ExtResource("1_6gkhc")
+
+[node name="Floor2" type="CharacterBody2D" parent="."]
+position = Vector2(-76, -119)
+
+[node name="Icon4" type="Sprite2D" parent="Floor2"]
+position = Vector2(56, 2.99999)
+scale = Vector2(4.10938, 0.171875)
+texture = ExtResource("1_6gkhc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2"]
+position = Vector2(55.5, 1.5)
+shape = SubResource("RectangleShape2D_p65wg")
+
+[node name="Bot" parent="." instance=ExtResource("2_ff3sl")]
+position = Vector2(-7, -17)
+
+[node name="Camera2D" type="Camera2D" parent="Bot"]
+zoom = Vector2(3, 3)
+drag_vertical_enabled = true
+
+[node name="Control" parent="Bot/Camera2D" instance=ExtResource("3_ff3sl")]
+offset_left = -193.0
+offset_top = 90.0
+offset_right = -193.0
+offset_bottom = 90.0
