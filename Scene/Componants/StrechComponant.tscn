@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b21twaqjr0d82"]
+
+[ext_resource type="Script" uid="uid://clawa1bht8k2x" path="res://Scripts/StrechComponant.gd" id="1_ot724"]
+
+[node name="StrechComponant" type="Node2D"]
+script = ExtResource("1_ot724")

@@ -1,0 +1,87 @@
+[gd_scene load_steps=8 format=3 uid="uid://darm5kd4o3k5e"]
+
+[ext_resource type="Script" uid="uid://y3waf7b6jhqw" path="res://Scripts/Player.gd" id="1_g4cgf"]
+[ext_resource type="Script" uid="uid://clawa1bht8k2x" path="res://Scripts/StrechComponant.gd" id="2_d58a2"]
+[ext_resource type="Texture2D" uid="uid://fhgpka7sejil" path="res://Assets/Sprites/SlimeCube.png" id="4_1otca"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p6qfx"]
+size = Vector2(14, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d58a2"]
+size = Vector2(4.125, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1otca"]
+size = Vector2(3.5625, 12)
+
+[sub_resource type="Curve" id="Curve_ybg4v"]
+_data = [Vector2(0.0113636, 0.820225), 0.0, 0.0, 0, 0, Vector2(1, 0.202247), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="SlimeCube" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_g4cgf")
+metadata/_edit_horizontal_guides_ = [0.0]
+
+[node name="StrechComponant" type="Node2D" parent="." node_paths=PackedStringArray("Sprite", "Collision")]
+script = ExtResource("2_d58a2")
+Sprite = NodePath("../SlimeCube")
+Collision = NodePath("../Collision")
+metadata/_custom_type_script = "uid://clawa1bht8k2x"
+
+[node name="SlimeCube" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.627451)
+position = Vector2(1, 0)
+texture = ExtResource("4_1otca")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_p6qfx")
+debug_color = Color(0, 0, 0, 0.42)
+
+[node name="ObjectDetectorRight" type="Area2D" parent="."]
+position = Vector2(-1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectDetectorRight"]
+position = Vector2(12, 1)
+shape = SubResource("RectangleShape2D_d58a2")
+
+[node name="ObjectDetectorLeft" type="Area2D" parent="."]
+position = Vector2(-1, 0)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ObjectDetectorLeft"]
+position = Vector2(-8, 1)
+shape = SubResource("RectangleShape2D_1otca")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, 8)
+emitting = false
+amount = 5
+lifetime = 0.3
+one_shot = true
+speed_scale = 1.2
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 30.0
+scale_amount_min = 3.0
+scale_amount_max = 6.0
+scale_amount_curve = SubResource("Curve_ybg4v")
+
+[node name="ChangingTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="FastFallingDelayTimer" type="Timer" parent="."]
+wait_time = 1.2
+one_shot = true
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
+[connection signal="body_entered" from="ObjectDetectorRight" to="." method="_on_object_detector_body_entered"]
+[connection signal="body_entered" from="ObjectDetectorLeft" to="." method="_on_object_detector_body_entered"]
+[connection signal="timeout" from="ChangingTimer" to="." method="_on_changing_timer_timeout"]
