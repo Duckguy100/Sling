@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://darm5kd4o3k5e"]
+[gd_scene load_steps=9 format=3 uid="uid://darm5kd4o3k5e"]
 
 [ext_resource type="Script" uid="uid://y3waf7b6jhqw" path="res://Scripts/Player.gd" id="1_g4cgf"]
 [ext_resource type="Script" uid="uid://clawa1bht8k2x" path="res://Scripts/StrechComponant.gd" id="2_d58a2"]
@@ -16,6 +16,11 @@ size = Vector2(3.5625, 12)
 [sub_resource type="Curve" id="Curve_ybg4v"]
 _data = [Vector2(0.0113636, 0.820225), 0.0, 0.0, 0, 0, Vector2(1, 0.202247), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="Curve" id="Curve_dry71"]
+_limits = [0.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1e-05, 200), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [node name="SlimeCube" type="CharacterBody2D"]
 collision_layer = 2
@@ -52,13 +57,14 @@ position = Vector2(-1, 0)
 position = Vector2(-8, 1)
 shape = SubResource("RectangleShape2D_1otca")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="DustParticles" type="CPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.627451)
 position = Vector2(0, 8)
 emitting = false
 amount = 5
 lifetime = 0.3
 one_shot = true
-speed_scale = 1.2
+speed_scale = 0.8
 explosiveness = 1.0
 emission_shape = 1
 emission_sphere_radius = 1.0
@@ -69,13 +75,16 @@ initial_velocity_max = 30.0
 scale_amount_min = 3.0
 scale_amount_max = 6.0
 scale_amount_curve = SubResource("Curve_ybg4v")
+color = Color(0.439216, 0.933333, 0.439216, 1)
+anim_speed_min = 1.0
+anim_speed_max = 10.0
+anim_speed_curve = SubResource("Curve_dry71")
 
 [node name="ChangingTimer" type="Timer" parent="."]
 wait_time = 0.15
 one_shot = true
 
 [node name="FastFallingDelayTimer" type="Timer" parent="."]
-wait_time = 1.2
 one_shot = true
 
 [node name="CoyoteTimer" type="Timer" parent="."]

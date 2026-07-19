@@ -14,7 +14,7 @@ func SpriteAnimation():
 	if not Parent.is_on_floor() and not Parent.IsCrouching and not Parent.IsFastFalling: # Stretch when Jumping
 		Sprite.scale.x = scale.x - (-(Parent.velocity.y * 0.0007))
 		Sprite.scale.y = scale.y + (-(Parent.velocity.y * 0.0007))
-	elif Parent.IsFastFalling: # Streches the Parent when fast falling so the Parent won't get squshed to much
+	elif Parent.IsFastFalling and not Parent.IsCrouching: # Streches the Parent when fast falling so the Parent won't get squshed to much
 		Sprite.scale.x = scale.x - (-(Parent.velocity.y * 0.0004))
 		Sprite.scale.y = scale.y + (-(Parent.velocity.y * 0.0004))
 	elif Parent.IsCrouching: # Squash when Crouching
@@ -27,7 +27,10 @@ func SpriteAnimation():
 		
 	if Sprite.scale.y < 0.1:
 		Sprite.scale.y = 0.1
+	if Sprite.scale.x > 2:
+		Sprite.scale.x = 2
 
 func Recoil(): # Recoil for various things
-	Sprite.scale.y -= (Sprite.scale.y / 2)
-	Sprite.scale.x += (Sprite.scale.x / 2)
+	if not Parent.IsCrouching:
+		Sprite.scale.y -= (Sprite.scale.y / 2)
+		Sprite.scale.x += (Sprite.scale.x / 2)
